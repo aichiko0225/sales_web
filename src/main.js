@@ -3,9 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import http from './http'
+import '@/styles/index.scss' // global css
+import './icons'
 
 Vue.config.productionTip = false
-
+Vue.use(ElementUI)
+http.install(Vue)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
