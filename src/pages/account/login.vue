@@ -9,7 +9,7 @@
           <span class="svg-container svg-container_login">
             <icon-svg icon-class="user" />
           </span>
-          <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="账号"/>
+          <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="账号" autofocus="true"/>
         </el-form-item>
 
         <el-form-item prop="password">
@@ -19,7 +19,7 @@
           <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
             placeholder="密码" />
           <span class="show-pwd" @click="showPwd">
-            <icon-svg icon-class="eye" />
+            <icon-svg v-bind:icon-class="eyeSvg" />
           </span>
         </el-form-item>
 
@@ -33,7 +33,7 @@
 import cookie from '../../utils/cookie.js'
 
 export default {
-  data () {
+  data() {
     const validateUsername = (rule, value, callback) => {
       if (value.length <= 0) {
         callback(new Error('请输入正确的用户名'))
@@ -61,19 +61,22 @@ export default {
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
+      eyeSvg: 'eye',
       disabled: true,
       loading: false
     }
   },
   methods: {
-    showPwd () {
+    showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
+        this.eyeSvg = 'eye_open'
       } else {
         this.passwordType = 'password'
+        this.eyeSvg = 'eye'
       }
     },
-    handleLogin () {
+    handleLogin() {
       console.log(this.loginForm.username, this.loginForm.password)
       // Make a request for a user with a given ID
       // this.$http.post('/account/login')
@@ -98,11 +101,6 @@ export default {
       } else {
         console.log('账号密码格式不正确')
       }
-    },
-    passwordChange () {
-      this.showMessage = true
-    },
-    passwordBlur () {
     }
   }
 }

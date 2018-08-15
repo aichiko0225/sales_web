@@ -9,11 +9,20 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
+  // 滚动位置
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       path: '/',
       name: 'Layout',
       component: Layout,
+      redirect: '/dashboard',
+      children: [{
+        path: '/dashboard',
+        component: () => import('@/pages/dashboard/index'),
+        name: 'dashboard',
+        meta: { title: 'dashboard', icon: 'dashboard', noCache: true, requireAuth: true }
+      }],
       meta: {
         requireAuth: true
       }
@@ -33,8 +42,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
-    let user_id = cookie.getCookie('user_id')
-    console.log(user_id)
     let userId = cookie.getCookie('user_id')
     console.log('userId ====', userId)
     if (userId.length === 0) {

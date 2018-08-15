@@ -3,7 +3,7 @@
 // export const CookieExpires = parseFloat(CONFIG.MEMBER_COOKIE_EXPIRES) / 24
 
 export default {
-  setCookie: function (cname, cvalue, exdays = 30) {
+  setCookie: function(cname, cvalue, exdays = 30) {
     var d = new Date()
     d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
     var expires = 'expires=' + d.toUTCString()
@@ -14,7 +14,7 @@ export default {
     }
     console.log(document.cookie)
   },
-  getCookie: function (cname) {
+  getCookie: function(cname) {
     var name = cname + '='
     var ca = document.cookie.split(';')
     for (var i = 0; i < ca.length; i++) {
@@ -25,11 +25,11 @@ export default {
     return ''
   },
   // 清除cookie
-  clearCookie: function () {
+  clearCookie: function() {
     this.setCookie('username', '', -1)
   },
   // 删除cookie
-  removeCookie: function (cookieName) {
+  removeCookie: function(cookieName) {
     this.setCookie(cookieName, '', -1)
   }
 }

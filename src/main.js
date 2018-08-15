@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import http from './http'
 import '@/styles/index.scss' // global css
 import './icons'
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -16,6 +17,7 @@ http.install(Vue)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
