@@ -1,7 +1,9 @@
 const user = {
   state: {
     token: '',
-    name: ''
+    name: '',
+    // 头像
+    avatar: ''
   }
 }
 

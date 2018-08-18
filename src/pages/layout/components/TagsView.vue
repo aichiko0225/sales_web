@@ -1,7 +1,6 @@
 
 <template>
-  <div>
-  </div>
+  <div class="tags-view-container"></div>
 </template>
 
 <script>
