@@ -16,6 +16,7 @@
     "axios": "^0.18.0",
     "element-ui": "^2.4.5",
     "qs": "^6.5.2",
+    "screenfull": "^3.3.2",
     "svg-sprite-loader": "^3.8.0",
     "vue": "^2.5.2",
     "vue-i18n": "^8.0.0",

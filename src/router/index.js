@@ -46,22 +46,50 @@ export const asyncRouterMap = [
     redirect: 'noredirect',
     meta: {
       title: 'customer',
-      icon: 'peoples'
+      icon: 'peoples',
+      requireAuth: true
     },
     children: [
       {
         path: 'manager',
         // 管理客户
         name: 'managerCustomer',
-        component: () => import('@/pages/dashboard/index'),
-        meta: { title: 'managerCustomer' }
+        component: () => import('@/pages/customer/manager'),
+        meta: { title: 'managerCustomer', requireAuth: true }
       },
       {
         path: 'add',
         // 管理客户
         name: 'addCustomer',
         component: () => import('@/pages/dashboard/index'),
-        meta: { title: 'addCustomer' }
+        meta: { title: 'addCustomer', requireAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: Layout,
+    meta: {
+      title: 'orders',
+      icon: 'orders',
+      requireAuth: true
+    },
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'query',
+        // 查询订单
+        name: 'queryOrders',
+        component: () => import('@/pages/orders/queryOrders'),
+        meta: { title: 'queryOrders', requireAuth: true }
+      },
+      {
+        path: 'placeOrder',
+        // 查询订单
+        name: 'placeOrder',
+        component: () => import('@/pages/customer/manager'),
+        meta: { title: 'placeOrder', requireAuth: true }
       }
     ]
   }

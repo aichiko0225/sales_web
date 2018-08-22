@@ -3,13 +3,13 @@
     <router-link v-if="hasOneShowingChild(item.children) && !onlyOneChild.children && !item.alwaysShow" :to="resolvePath(onlyOneChild.path)">
       <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
         <icon-svg v-if="onlyOneChild.meta&&onlyOneChild.meta.icon" :icon-class="onlyOneChild.meta.icon"></icon-svg>
-        <span v-if="onlyOneChild.meta&&onlyOneChild.meta.title" slot="title">{{onlyOneChild.meta.title}}</span>
+        <span v-if="onlyOneChild.meta&&onlyOneChild.meta.title" slot="title">{{generateTitle(onlyOneChild.meta.title)}}</span>
       </el-menu-item>
     </router-link>
     <el-submenu v-else :index="item.name||item.path">
       <template slot="title">
         <icon-svg v-if="item.meta&&item.meta.icon" :icon-class="item.meta.icon"></icon-svg>
-        <span v-if="item.meta&&item.meta.title" slot="title">{{item.meta.title}}</span>
+        <span v-if="item.meta&&item.meta.title" slot="title">{{generateTitle(item.meta.title)}}</span>
       </template>
       <template v-for="child in item.children" v-if="!child.hidden">
           <sidebar-item :is-nest="true" class="nest-menu" v-if="child.children&&child.children.length>0" :item="child" :key="child.path" :base-path="resolvePath(child.path)"></sidebar-item>
@@ -17,7 +17,7 @@
           <router-link v-else :to="resolvePath(child.path)" :key="child.name">
             <el-menu-item :index="resolvePath(child.path)">
               <icon-svg v-if="child.meta&&child.meta.icon" :icon-class="child.meta.icon"></icon-svg>
-              <span v-if="child.meta&&child.meta.title" slot="title">{{child.meta.title}}</span>
+              <span v-if="child.meta&&child.meta.title" slot="title">{{generateTitle(child.meta.title)}}</span>
             </el-menu-item>
           </router-link>
         </template>
@@ -27,6 +27,7 @@
 
 <script>
 import path from 'path'
+import { generateTitle } from '@/utils'
 
 export default {
   name: 'SidebarItem',
@@ -51,6 +52,7 @@ export default {
     }
   },
   methods: {
+    generateTitle,
     hasOneShowingChild(children) {
       const showingChildren = children.filter(item => {
         if (item.hidden) {
