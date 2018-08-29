@@ -92,6 +92,33 @@ export const asyncRouterMap = [
         meta: { title: 'placeOrder', requireAuth: true }
       }
     ]
+  },
+  {
+    path: '/goods',
+    name: 'goods',
+    component: Layout,
+    meta: {
+      title: 'goods',
+      icon: 'goods',
+      requireAuth: true
+    },
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'query',
+        // 查询商品
+        name: 'queryGoods',
+        component: () => import('@/pages/orders/queryOrders'),
+        meta: { title: 'queryGoods', requireAuth: true }
+      },
+      {
+        path: 'add',
+        // 新增商品
+        name: 'addGoods',
+        component: () => import('@/pages/customer/manager'),
+        meta: { title: 'addGoods', requireAuth: true }
+      }
+    ]
   }
 ]
 

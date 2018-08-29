@@ -8,7 +8,7 @@ const instance = axios.create(config)
 // POST传参序列化(添加请求拦截器)
 instance.interceptors.request.use(
   config => {
-    config.data = JSON.stringify(config.data)
+    console.log(config)
     return config
   },
   error => {
@@ -24,16 +24,16 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     console.log(response)
-    // if (response.data.code === 1) {
-    // } else {
-    //   let errorInfo = response.data.message ? response.data.message : '未知错误'
-    //   Message({
-    //     message: errorInfo,
-    //     type: 'error',
-    //     center: true
-    //   })
-    // return Promise.reject(errorInfo)
-    // }
+    if (response.data.code === 0) {
+    } else {
+      let errorInfo = response.data.message ? response.data.message : '未知错误'
+      Message({
+        message: errorInfo,
+        type: 'error',
+        center: true
+      })
+      return Promise.reject(errorInfo)
+    }
     return response
   },
   error => {

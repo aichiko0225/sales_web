@@ -48,5 +48,15 @@ module.exports = {
     'spaced-comment': [2, 'always', {
       'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
     }],
+    "no-multi-spaces": 'off', // 不能用多余的空格
+    "no-trailing-spaces": 'off', // 一行结束后面不要有空格
+    "padded-blocks": 'off', // 块语句内行首行尾是否要空行
+    "space-before-blocks": [0, "always"],//不以新行开始的块{前面要不要有空格
+    "no-unused-vars": [2, { 
+      // 允许声明未使用变量
+      "vars": "local",
+      // 参数不检查
+      "args": "none" 
+    }],
   }
 }

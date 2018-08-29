@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 export default {
   method: 'post',
   // 基础url前缀
@@ -13,5 +15,11 @@ export default {
   // 携带凭证
   withCredentials: true,
   // 返回数据类型
-  responseType: 'json' | 'text'
+  responseType: 'json' | 'text',
+
+  transformRequest: [function(data, headers) {
+    // Do whatever you want to transform the data
+    console.log(data)
+    return qs.stringify(data)
+  }]
 }

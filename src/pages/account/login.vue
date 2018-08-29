@@ -31,6 +31,7 @@
 
 <script>
 import cookie from '../../utils/cookie.js'
+// import qs from 'qs'
 
 export default {
   data() {
@@ -79,28 +80,45 @@ export default {
     handleLogin() {
       console.log(this.loginForm.username, this.loginForm.password)
       // Make a request for a user with a given ID
-      // this.$http.post('/account/login')
-      //   .then(function (response) {
-      //     // handle success
-      //     console.log('response ===== ', response)
-      //   })
-      //   .catch(function (error) {
-      //     // handle error
-      //     console.log('error ===== ', error)
-      //   })
-      //   .then(function () {
-      //     // always executed
-      //   })
       if (this.loginForm.username.length > 0 && this.loginForm.password.length >= 6) {
-        cookie.setCookie('user_id', '1000')
-        this.$router.push({
-          path: '/',
-          params: { userId: 123 }
+        var that = this
+        // URLSearchParams对象是为了让参数以form data形式
+        // var params = new URLSearchParams()
+        // params.append('jdmc', 'hello jdmc你好')
+        // params.append('jddm', '2')
+
+        let params = {
+          username: this.loginForm.username,
+          password: this.loginForm.password
+        }
+
+        this.$http.post('/account/login', params).then(function(response) {
+          // handle success
+          console.log('data ===== ', response.data)
+          let user_id = response.data.data.user_id
+          if (user_id != null) {
+            cookie.setCookie('user_id', user_id)
+            that.$router.push({
+              path: '/',
+              params: { userId: user_id }
+            })
+          }
+        }).catch(function(error) {
+          // handle error
+          console.log('error ===== ', error)
         })
-        console.log('lalala')
-      } else {
-        console.log('账号密码格式不正确')
       }
+      
+      // if (this.loginForm.username.length > 0 && this.loginForm.password.length >= 6) {
+      //   cookie.setCookie('user_id', '1000')
+      //   this.$router.push({
+      //     path: '/',
+      //     params: { userId: 123 }
+      //   })
+      //   console.log('lalala')
+      // } else {
+      //   console.log('账号密码格式不正确')
+      // }
     }
   }
 }
